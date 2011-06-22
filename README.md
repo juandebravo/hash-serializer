@@ -10,7 +10,36 @@ ruby objects but still you haven't a way to convert to JSON or any other format.
 # INSTALLATION
     gem install hash-serializer
 
-# HOW TO USE
+# HOT TO USE v0.2.0
+	require 'hash-serializer'
+
+	class User
+	    attr_accessor :nickname
+	    attr_accessor :email
+	    attr_accessor :password
+
+	    def initialize(nickname = nil, email = nil, password = nil)
+	        @nickname = nickname
+	        @email = email
+	        @password = password
+	    end
+	end
+
+	u = User.new("juandebravo", "juan at pollinimini dot net", "*******")
+
+	HashSerializer.to_hash(u)
+	    => {"nickname"=>"juandebravo", "email"=>"juan at pollinimini dot net", "password"=>"*******"}
+
+	HashSerializer.to_hash(u, u.nickname)
+	    => {"juandebravo"=>{"nickname"=>"juandebravo", "email"=>"juan at pollinimini dot net", "password"=>"*******"}}
+
+	puts HashSerializer.to_json(u)
+	    => {"nickname":"juandebravo","email":"juan at pollinimini dot net","password":"*******"}
+
+	puts HashSerializer.to_json(u, "user")
+	    => {"user":{"nickname":"juandebravo","email":"juan at pollinimini dot net","password":"*******"}}
+
+# HOW TO USE v0.1.0
 
     require 'hash-serializer'
 
@@ -40,3 +69,7 @@ ruby objects but still you haven't a way to convert to JSON or any other format.
     puts u.serialize_to_json("user")
         => {"user":{"nickname":"juandebravo","email":"juan at pollinimini dot net","password":"*******"}}
 
+# CHANGES
+
+* v0.2.0 does not monkey patch Object class anymore. Always seems to be a bad idea this, so v0.2.0
+  is incompatible backwards.
