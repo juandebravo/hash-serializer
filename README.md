@@ -1,11 +1,9 @@
 
 # INTRODUCTION
 
-The aim of this gem is to enable an easy way to serialize an object in a Hash object or a JSON data structure using
-the attributes name as keys.
+The aim of this gem is to enable an easy way to serialize an object in a Hash object or a JSON data structure using attributes name as keys.
 
-This can be useful if you need to work with XSD schemas while using code generators that convert an schema in
-ruby objects but still you haven't a way to convert to JSON or any other format.
+This can be useful if you need to work with XSD schemas while using code generators that convert an schema in ruby objects but still you haven't a way to convert to JSON or any other format.
 
 # INSTALLATION
     gem install hash-serializer
