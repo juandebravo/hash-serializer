@@ -24,7 +24,7 @@ describe "hash-serializer" do
 
     describe "object to json extension" do
       it "converts properly a basic object with root name" do
-        json_obj = obj.serialize_to_json("object")
+        json_obj = HashSerializer.to_json(obj, "object")
         json_obj.should be_a_kind_of(String)
         json_obj = JSON.parse(json_obj)
         json_obj.should be_a_kind_of(Hash)
@@ -37,7 +37,7 @@ describe "hash-serializer" do
 
 
       it "converts properly a basic object without root name" do
-        json_obj = obj.serialize_to_json
+        json_obj = HashSerializer.to_json(obj)
         json_obj.should be_a_kind_of(String)
         json_obj = JSON.parse(json_obj)
         json_obj.should be_a_kind_of(Hash)
@@ -50,7 +50,7 @@ describe "hash-serializer" do
 
     describe "object to hash extension" do
       it "converts properly a basic object without root name" do
-        json_obj = obj.serialize_to_hash
+        json_obj = HashSerializer.to_hash(obj)
 
         json_obj.should be_a_kind_of(Hash)
         json_obj.should have_key("foo")
@@ -58,7 +58,7 @@ describe "hash-serializer" do
       end
 
       it "converts properly a basic object with root name" do
-        json_obj = obj.serialize_to_hash("foo")
+        json_obj = HashSerializer.to_hash(obj, "foo")
         json_obj.should be_a_kind_of(Hash)
         json_obj.should have_key("foo")
 
@@ -68,7 +68,7 @@ describe "hash-serializer" do
       end
 
       it "converts properly a basic object with a symbol as root name" do
-        json_obj = obj.serialize_to_hash(:foo)
+        json_obj = HashSerializer.to_hash(obj, :foo)
         json_obj.should be_a_kind_of(Hash)
         json_obj.should have_key(:foo)
 
@@ -84,7 +84,7 @@ describe "hash-serializer" do
     describe "object to hash extension" do
       it "converts properly a complex object without root name" do
 
-        json_obj = complex_obj.serialize_to_hash
+        json_obj = HashSerializer.to_hash(complex_obj)
 
         ["foo", "bar", "bazz"].each { |key|
           json_obj.should have_key(key)
@@ -98,7 +98,7 @@ describe "hash-serializer" do
 
       it "converts properly a complex object wit root name" do
 
-        json_obj = complex_obj.serialize_to_hash(:object)
+        json_obj = HashSerializer.to_hash(complex_obj, :object)
 
         json_obj.should be_a_kind_of(Hash)
         json_obj.should have_key(:object)
@@ -122,7 +122,7 @@ describe "hash-serializer" do
     describe "object to hash extension" do
       it "converts properly a complex object without root name" do
 
-        json_obj = complex_obj.serialize_to_hash
+        json_obj = HashSerializer.to_hash(complex_obj)
 
         ["foo", "bar", "bazz", "array"].each { |key|
           json_obj.should have_key(key)
@@ -140,7 +140,7 @@ describe "hash-serializer" do
     describe "object to json extension" do
 
       it "converts properly a basic object with root name" do
-        json_obj = complex_obj.serialize_to_json
+        json_obj = HashSerializer.to_json(complex_obj)
         json_obj.should be_a_kind_of(String)
         json_obj = JSON.parse(json_obj)
         json_obj.should be_a_kind_of(Hash)
